@@ -1,0 +1,10 @@
+{
+    "name": "JCli API",
+    "description": "A lightweight javascript command line interpreter",
+    "version": "0.1",
+    "url": "http://coming.soon.com",
+    "options": {
+        "outdir": "build/doc",
+        "paths": "js/src"
+    }
+}
