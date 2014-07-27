@@ -77,19 +77,21 @@ define(
             commandOptions = this.parser.parse(_text);
         }
         catch (e) {
-            //TODO: Send the error to the view
-            console.error(e);
-            return;
+            return failed_execution(e.message);
         }
 
         var command = this.commands.get_command(
             commandOptions.commandName
         );
 
+        //TODO: Have get_command thow an exception instead
         if (command === undefined) {
-            //TODO: Send the error to the view
-            console.error('Cannot find command');
-            return;
+            return failed_execution(
+                new Error(
+                    'Cannot find command ' +
+                    commandOptions.commandName
+                )
+            );
         }
 
         this.history.push(_text);
