@@ -6,8 +6,6 @@
 require(['jcli'], function (JCli) {
     "use strict";
 
-    console.log(JCli);
-
     //Initialize JCLI, no context here
     var jcli = new JCli();
 
