@@ -96,6 +96,9 @@ define(
             );
         }
 
+        //TODO: Add another processing step to change the array
+        // of args into a dictionnary to have named keys.
+
         //Third: Keep the command in the history
         this.history.push(_text);
 
