@@ -14,3 +14,8 @@ You can generate the documentation by running this command at the root of the pr
 You can build JCli by using Requirejs Node module and the configuration file like so:
 
 `r.js -o build.js`
+
+## TODO
+ - Simplify the building/doc generation and other tasks by using Grunt
+ - Unit tests with Karma
+ - Provide a facade for the user to plug into JCli events
