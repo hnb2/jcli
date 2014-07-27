@@ -3,10 +3,6 @@
     paths: {
         lib: '../lib'
     },
-    dir: 'build/js',
-    modules: [
-        {
-            name: 'jcli'
-        }
-    ]
+    name: 'jcli',
+    out: 'build/jcli.js'
 })
