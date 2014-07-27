@@ -4,7 +4,9 @@
  * @class JCli
  * @author Pierre Guillemot
  */
-define(['commands', 'parser', 'lib/q'], function (Commands, Parser, Q) {
+define(
+    ['commands', 'parser', 'lib/q'],
+    function (Commands, Parser, Q) {
     "use strict";
 
     /**
@@ -24,15 +26,17 @@ define(['commands', 'parser', 'lib/q'], function (Commands, Parser, Q) {
     /**
      * Add a command to JCli so that it can be interpreted.
      * @method add_command
-     * @param {Object} _command, the command to add
+     * @param {Object} _command, a custom object which contains the
+                            data of your command.
      * @public
      */
     JCli.prototype.add_command = function (_command) {
         try {
-            this.commands.register(_command);
+            var command = this.commands.make_command(_command);
+            this.commands.register(command);
         }
         catch (e) {
-            console.error(e);
+            console.error(e.message);
         }
     };
 

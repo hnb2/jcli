@@ -3,7 +3,7 @@
  * @class Commands
  * @author Pierre Guillemot
  */
-define([], function () {
+define(["command"], function (Command) {
     "use strict";
 
     /**
@@ -13,7 +13,7 @@ define([], function () {
      */
     var Commands = function () {
         /**
-         * Array which will contains all the commands
+         * Dictionnary which will contains all the commands
          * @property commands
          * @type Object<String, Object>
          */
@@ -59,6 +59,32 @@ define([], function () {
      */
     Commands.prototype.get_command = function (_name) {
         return this._get_commands()[_name];
+    };
+
+    /**
+     * Factory method to create Command object from a dictionnary.
+     * @method make_command
+     * @param {Object} _command, object with the following fields set
+                        name, description, params, exec
+     * @return {Object} Command object
+     * @public
+     */
+    Commands.prototype.make_command = function (_command) {
+        //TODO: Add additional validation
+        if (_command === undefined) {
+            throw new Error(
+                'Object undefined'
+            );
+        }
+
+        var command = new Command(
+            command.name,
+            command.description,
+            command.params
+        );
+        command.exec = command.exec;
+
+        return command;
     };
 
     return Commands;

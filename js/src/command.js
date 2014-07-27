@@ -1,6 +1,6 @@
 /**
- * Base class for all the commands, they must inherits this class
- * and override the exec method.
+ * Base class for all the commands.
+ * It is created by the Commands class.
  * @class Command
  * @author Pierre Guillemot
  */
