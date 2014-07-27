@@ -9,3 +9,8 @@ Simply run `npm install` at the root of the project. It will download locally th
 You can generate the documentation by running this command at the root of the project:
 
 `yuidoc -c yuidoc.json`
+
+### Building
+You can build JCli by using Requirejs Node module and the configuration file like so:
+
+`r.js -o build.js`

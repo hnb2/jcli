@@ -3,6 +3,7 @@
     "description": "This is only necessary to generate documentation and run unit tests.",
     "author": "Pierre Guillemot <pierreguillemot@yahoo.fr>",
     "devDependencies": {
+        "requirejs": "2.1.x",
         "karma": "0.12.x",
         "karma-jasmine": "0.1.x",
         "karma-cli": "0.0.x",

@@ -1,5 +1,6 @@
 #Ignore the content of the build directory (doc + minified js)
-build
+build/doc
+build/jcli.min.js
 
 #Ignore the content of the Code coverage Karma plugin
 coverage
