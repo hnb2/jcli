@@ -32,6 +32,7 @@ define([], function () {
             );
         }
 
+        //Split the command using a single blank space
         var splittedText = _text.split(' ');
 
         var commandName = splittedText[0];
@@ -39,7 +40,10 @@ define([], function () {
         var args = [];
         if (splittedText.length > 1) {
             splittedText.forEach(function (element, index, array) {
-                args.push(element);
+                //TODO: Find another way to start the loop from 1
+                if (index > 0) {
+                    args.push(element);
+                }
             });
         }
 
