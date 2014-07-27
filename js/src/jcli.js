@@ -73,6 +73,7 @@ define(
     JCli.prototype.interpret = function (_text) {
         var commandOptions;
 
+        //First: parse the input
         try {
             commandOptions = this.parser.parse(_text);
         }
@@ -80,6 +81,7 @@ define(
             return failed_execution(e.message);
         }
 
+        //Second: try to retrieve the command
         var command = this.commands.get_command(
             commandOptions.commandName
         );
@@ -94,8 +96,10 @@ define(
             );
         }
 
+        //Third: Keep the command in the history
         this.history.push(_text);
 
+        //Finally: try to execute the 'exec' method
         var that = this;
         Q.fcall(function () {
             return command.exec(
