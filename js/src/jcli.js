@@ -4,7 +4,7 @@
  * @class JCli
  * @author Pierre Guillemot
  */
-define(['commands', 'parser'], function (Commands, Parser) {
+define(['commands', 'parser', 'lib/q'], function (Commands, Parser, Q) {
     "use strict";
 
     /**
@@ -15,7 +15,7 @@ define(['commands', 'parser'], function (Commands, Parser) {
      * @public
      */
     var JCli = function (_context) {
-        this.context = _context;
+        this.context = _context || {};
         this.commands = new Commands();
         this.parser = new Parser();
         this.history = [];
@@ -37,14 +37,36 @@ define(['commands', 'parser'], function (Commands, Parser) {
     };
 
     /**
-     * Execute the user input (if possible), by parsing it, searching
+     * Callback when a command is successully executed.
+     * @method successful_execution
+     * @param {Object} _result, DOM object
+     * @private
+     */
+    var successful_execution = function (_result) {
+        //TODO: Trigger an event
+        console.log(_result);
+    };
+
+    /**
+     * Callback when a command fialed to execute.
+     * @method failed_execution
+     * @param {Object} _error, Error object with a message set
+     * @private
+     */
+    var failed_execution = function (_error) {
+        //TODO: Trigger an event
+        console.error(_error.message);
+    };
+
+    /**
+     * Interpret the user input (if possible), by parsing it, searching
      * for the command, and then execute it with the arguments and
      * context set by the user when constructing JCli.
-     * @method exec
+     * @method interpret
      * @param {String} _text, the user input
      * @public
      */
-    JCli.prototype.exec = function (_text) {
+    JCli.prototype.interpret = function (_text) {
         var commandOptions;
 
         try {
@@ -68,10 +90,15 @@ define(['commands', 'parser'], function (Commands, Parser) {
 
         this.history.push(_text);
 
-        //TODO: send the result to the view
-        command.exec(
-            commandOptions.args,
-            this.context
+        var that = this;
+        Q.fcall(function () {
+            return command.exec(
+                commandOptions.args,
+                that.context
+            );
+        }).then(
+            successful_execution,
+            failed_execution
         );
     };
 
