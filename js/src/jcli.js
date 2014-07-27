@@ -103,15 +103,14 @@ define(
         this.history.push(_text);
 
         //Finally: try to execute the 'exec' method
-        var that = this;
         Q.fcall(function () {
             return command.exec(
                 commandOptions.args,
-                that.context
+                this.context
             );
         }).then(
-            that.successful_execution,
-            that.failed_execution
+            this.successful_execution,
+            this.failed_execution
         );
     };
 
