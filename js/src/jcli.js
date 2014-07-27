@@ -41,24 +41,24 @@ define(
     };
 
     /**
-     * Callback when a command is successully executed.
+     * Callback when a command is successully executed. Has to
+     * be overriden by the user.
      * @method successful_execution
      * @param {Object} _result, DOM object
-     * @private
+     * @public
      */
-    var successful_execution = function (_result) {
-        //TODO: Trigger an event
+    JCli.prototype.successful_execution = function (_result) {
         console.log(_result);
     };
 
     /**
-     * Callback when a command fialed to execute.
+     * Callback when a command failed to execute. Has to be
+     * overriden by the user.
      * @method failed_execution
      * @param {Object} _error, Error object with a message set
-     * @private
+     * @public
      */
-    var failed_execution = function (_error) {
-        //TODO: Trigger an event
+    JCli.prototype.failed_execution = function (_error) {
         console.error(_error.message);
     };
 
@@ -66,7 +66,7 @@ define(
      * Interpret the user input (if possible), by parsing it, searching
      * for the command, and then execute it with the arguments and
      * context set by the user when constructing JCli.
-     * @method interpret
+     * @method _interpret
      * @param {String} _text, the user input
      * @public
      */
@@ -78,7 +78,7 @@ define(
             commandOptions = this.parser.parse(_text);
         }
         catch (e) {
-            return failed_execution(e.message);
+            return this.failed_execution(e.message);
         }
 
         //Second: try to retrieve the command
@@ -88,7 +88,7 @@ define(
 
         //TODO: Have get_command thow an exception instead
         if (command === undefined) {
-            return failed_execution(
+            return this.failed_execution(
                 new Error(
                     'Cannot find command ' +
                     commandOptions.commandName
@@ -110,8 +110,8 @@ define(
                 that.context
             );
         }).then(
-            successful_execution,
-            failed_execution
+            that.successful_execution,
+            that.failed_execution
         );
     };
 
