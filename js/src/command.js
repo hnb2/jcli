@@ -87,7 +87,7 @@ define([], function () {
      * @public
      */
     Command.prototype.exec = function (_args, _context) {
-        throw new Error("Must be implemented !!!");
+        throw new Error("exec must be implemented !!!");
     };
     
     /**

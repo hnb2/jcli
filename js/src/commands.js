@@ -3,7 +3,7 @@
  * @class Commands
  * @author Pierre Guillemot
  */
-define(["command"], function (Command) {
+define(['command'], function (Command) {
     "use strict";
 
     /**
@@ -47,7 +47,7 @@ define(["command"], function (Command) {
             );
         }
 
-        this._get_commands().push(_command);
+        this._get_commands()[_command.get_name()] = _command;
     };
 
     /**
@@ -78,11 +78,11 @@ define(["command"], function (Command) {
         }
 
         var command = new Command(
-            command.name,
-            command.description,
-            command.params
+            _command.name,
+            _command.description,
+            _command.params
         );
-        command.exec = command.exec;
+        command.exec = _command.exec;
 
         return command;
     };
