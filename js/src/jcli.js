@@ -12,14 +12,52 @@ define(
     /**
      * Constructor
      * @method JCli
-     * @param {Object} _context, dictionnary of objects set by  the
-     *                  api user.
+     * @param {Object} _options, check the property doc
      * @public
      */
-    var JCli = function (_context) {
-        this.context = _context || {};
+    var JCli = function (_options) {
+        /**
+         * Dictionnary provided by the user to store custom objects
+         * @property context
+         * @type Object
+         */
+        this.context = _options.context || {};
+
+        /**
+         * Callback called on successful command execution
+         * @property on_success
+         * @type Function
+         */
+        this.on_success = _options.on_success ||
+            this.successful_execution;
+
+        /**
+         * Callback called on successful command execution
+         * @property on_failure
+         * @type Function
+         */
+        this.on_failure = _options.on_failure ||
+            this.failed_execution;
+
+        /**
+         * Used to Register and make commands
+         * @property commands
+         * @type Object
+         */
         this.commands = new Commands();
+
+        /**
+         * Used to parse the user input
+         * @property parser
+         * @type Object
+         */
         this.parser = new Parser();
+
+        /**
+         * Contains the successful commands as string
+         * @property history
+         * @type Array
+         */
         this.history = [];
     };
 
@@ -41,8 +79,7 @@ define(
     };
 
     /**
-     * Callback when a command is successully executed. Has to
-     * be overriden by the user.
+     * Callback when a command is successully executed.
      * @method successful_execution
      * @param {Object} _result, DOM object
      * @public
@@ -52,8 +89,7 @@ define(
     };
 
     /**
-     * Callback when a command failed to execute. Has to be
-     * overriden by the user.
+     * Callback when a command failed to execute.
      * @method failed_execution
      * @param {Object} _error, Error object with a message set
      * @public
@@ -78,7 +114,7 @@ define(
             commandOptions = this.parser.parse(_text);
         }
         catch (e) {
-            return this.failed_execution(e.message);
+            return this.on_failure(e);
         }
 
         //Second: try to retrieve the command
@@ -88,7 +124,7 @@ define(
 
         //TODO: Have get_command thow an exception instead
         if (command === undefined) {
-            return this.failed_execution(
+            return this.on_failure(
                 new Error(
                     'Cannot find command ' +
                     commandOptions.commandName
@@ -109,8 +145,8 @@ define(
                 this.context
             );
         }).then(
-            this.successful_execution,
-            this.failed_execution
+            this.on_success,
+            this.on_failure
         );
     };
 
