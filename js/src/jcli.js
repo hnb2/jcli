@@ -112,6 +112,9 @@ define(
         //First: parse the input
         try {
             commandOptions = this.parser.parse(_text);
+
+            //Add the context at the end of the arguments array
+            commandOptions.args.push(this.context);
         }
         catch (e) {
             return this.on_failure(e);
@@ -132,17 +135,16 @@ define(
             );
         }
 
-        //TODO: Add another processing step to change the array
-        // of args into a dictionnary to have named keys.
+        //TODO: Validate the arguments
 
         //Third: Keep the command in the history
         this.history.push(_text);
 
         //Finally: try to execute the 'exec' method
         Q.fcall(function () {
-            return command.exec(
-                commandOptions.args,
-                this.context
+            return command.exec.apply(
+                this,
+                commandOptions.args
             );
         }).then(
             this.on_success,
