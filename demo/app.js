@@ -27,12 +27,12 @@ require(['jcli', 'jquery'], function (JCli, $) {
     };
 
     var options = {
-        context: {},
+        context: {username: 'John'},
         on_success: successful_execution,
         on_failure: failed_execution
     };
 
-    //Initialize JCLI, no context here
+    //Initialize JCLI
     var jcli = new JCli(options);
 
     //Create a simple hello command
@@ -45,8 +45,11 @@ require(['jcli', 'jquery'], function (JCli, $) {
                 'type': 'string'
             }
         ],
-        'exec': function (args, context) {
-            return 'Hello ' + args[0];
+        'exec': function (name, context) {
+            return 'Hello ' +
+                name +
+                ', my name is ' +
+                context.username;
         }
     };
 
