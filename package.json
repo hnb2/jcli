@@ -1,15 +1,16 @@
 {
-    "name": "JCli",
-    "description": "This is only necessary to generate documentation and run unit tests.",
-    "author": "Pierre Guillemot <pierreguillemot@yahoo.fr>",
-    "devDependencies": {
-        "requirejs": "2.1.x",
-        "karma": "0.12.x",
-        "karma-jasmine": "0.1.x",
-        "karma-cli": "0.0.x",
-        "karma-requirejs": "0.2.x",
-        "karma-coverage": "0.2.x",
-        "yuidocjs": "0.3.x"
-    },
-    "engine": "0.10.x"
+  "name": "JCli",
+  "description": "This is only necessary to generate documentation and run unit tests.",
+  "author": "Pierre Guillemot <pierreguillemot@yahoo.fr>",
+  "devDependencies": {
+    "requirejs": "2.1.x",
+    "karma": "0.12.x",
+    "karma-jasmine": "0.1.x",
+    "karma-cli": "0.0.x",
+    "karma-requirejs": "0.2.x",
+    "karma-coverage": "0.2.x",
+    "grunt-contrib-yuidoc": "~0.5.2",
+    "grunt": "~0.4.5"
+  },
+  "engine": "0.10.x"
 }
