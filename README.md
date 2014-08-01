@@ -16,5 +16,7 @@ You can build JCli by using Requirejs Node module and the configuration file lik
 `grunt build`
 
 ## TODO
+ - Refactor the demo directory structure and add new examples
+ - Checkout [Almond](https://github.com/jrburke/almond) for proposing a built library which does not require RequireJs.
+ - Write a How To in the README file
  - Unit tests with Karma
- - Provide a facade for the user to plug into JCli events
