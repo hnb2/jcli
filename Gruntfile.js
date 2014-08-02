@@ -22,14 +22,14 @@ module.exports = function (grunt) {
                         lib: '../lib'
                     },
                     name: 'jcli',
-                    out: 'build/jcli.js'
+                    out: 'build/jcli.min.js'
                 }
             }
         },
         copy: {
             main: {
-                src: 'build/jcli.js',
-                dest: 'demo/jcli.js'
+                src: 'build/jcli.min.js',
+                dest: 'demo/lib/jcli.min.js'
             }
         }
     });
