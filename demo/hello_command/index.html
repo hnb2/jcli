@@ -4,8 +4,16 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <link rel="stylesheet" href="style.css">
-        <script data-main="app.js" src="../js/lib/require.min.js"></script>
-        <title>Jcli Demo</title>
+        <script data-main="app.js" src="../../js/lib/require.min.js"></script>
+        <script>
+            require.config({
+                paths: {
+                    jcli: '../lib/jcli.min',
+                    jquery: '../lib/jquery-2.1.1.min'
+                }
+            });
+        </script>
+        <title>Jcli Demo Hello World</title>
     </head>
 
     <body>
