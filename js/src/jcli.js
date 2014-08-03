@@ -29,7 +29,7 @@ define(
          * @type Function
          */
         this.on_success = _options.on_success ||
-            this.successful_execution;
+            successful_execution;
 
         /**
          * Callback called on successful command execution
@@ -37,7 +37,7 @@ define(
          * @type Function
          */
         this.on_failure = _options.on_failure ||
-            this.failed_execution;
+            failed_execution;
 
         /**
          * Used to Register and make commands
@@ -79,22 +79,22 @@ define(
     };
 
     /**
-     * Callback when a command is successully executed.
+     * Default callback when a command is successully executed.
      * @method successful_execution
      * @param {Object} _result, DOM object
-     * @public
+     * @private
      */
-    JCli.prototype.successful_execution = function (_result) {
+    var successful_execution = function (_result) {
         console.log(_result);
     };
 
     /**
-     * Callback when a command failed to execute.
+     * Default callback when a command failed to execute.
      * @method failed_execution
      * @param {Object} _error, Error object with a message set
-     * @public
+     * @private
      */
-    JCli.prototype.failed_execution = function (_error) {
+    var failed_execution = function (_error) {
         console.error(_error.message);
     };
 
