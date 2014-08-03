@@ -5,6 +5,7 @@
  * @author Pierre Guillemot
  */
 define([], function () {
+    "use strict";
 
     /**
      * Constructor
@@ -51,6 +52,73 @@ define([], function () {
             commandName: commandName,
             args: args
         };
+    };
+
+    /**
+     * Typechecking to verify if the parameter is a string
+     * @param {Any} _parameter, parameter to test
+     * @private
+     */
+    var validate_string = function (_parameter) {
+        if (typeof _parameter !== 'string') {
+            throw new Error(
+                _parameter + ' is not a string'
+            );
+        }
+    };
+
+    /**
+     * Typechecking to verify if the parameter is a number
+     * @param {Any} _parameter, parameter to test
+     * @private
+     */
+    var validate_number = function (_parameter) {
+        if (isNaN(parseInt(_parameter, 10))) {
+            throw new Error(
+                _parameter + ' is not a number'
+            );
+        }
+    };
+
+    /**
+     * Validate the command's arguments against those provided
+     * by the user. Throws an error if the number of arguments
+     * is incorrect or if the data type of a single argument
+     * is incorrect.
+     * @method validate_arguments
+     * @param {Object} _command, the Command called by the user
+     * @param {Array} _args, the arguments extracted by the
+                        the method Parser.parse
+     * @public
+     */
+    Parser.prototype.validate_arguments = function (_command, _args) {
+        var params = _command.get_params();
+
+        if (params.length !== _args.length) {
+            throw new Error(
+                'Incorrect usage of ' + _command.get_name()
+            );
+        }
+
+        _args.forEach(function (element, index, array) {
+            var type = params[index].type;
+
+            //TODO: Constants for the types
+            switch (type) {
+                case 'string':
+                    validate_string(element);
+                    break;
+                case 'number':
+                    //TODO: Re-assign a parsed number
+                    validate_number(element);
+                    break;
+                default:
+                    throw new Error(
+                        type +
+                        ' is not a supported type'
+                    );
+            }
+        });
     };
 
     return Parser;
