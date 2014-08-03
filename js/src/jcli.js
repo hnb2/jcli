@@ -113,29 +113,30 @@ define(
         try {
             commandOptions = this.parser.parse(_text);
 
+            //Second: try to retrieve the command
+            var command = this.commands.get_command(
+                commandOptions.commandName
+            );
+
+            //TODO: Have get_command thow an exception instead
+            if (command === undefined) {
+                throw new Error(
+                    'Cannot find command ' +
+                    commandOptions.commandName
+                );
+            }
+
+            this.parser.validate_arguments(
+                command,
+                commandOptions.args
+            );
+
             //Add the context at the end of the arguments array
             commandOptions.args.push(this.context);
         }
         catch (e) {
             return this.on_failure(e);
         }
-
-        //Second: try to retrieve the command
-        var command = this.commands.get_command(
-            commandOptions.commandName
-        );
-
-        //TODO: Have get_command thow an exception instead
-        if (command === undefined) {
-            return this.on_failure(
-                new Error(
-                    'Cannot find command ' +
-                    commandOptions.commandName
-                )
-            );
-        }
-
-        //TODO: Validate the arguments
 
         //Third: Keep the command in the history
         this.history.push(_text);
