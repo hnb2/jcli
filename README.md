@@ -16,7 +16,9 @@ You can build JCli by using Requirejs Node module and the configuration file lik
 `grunt build`
 
 ## TODO
- - Refactor the demo directory structure and add new examples
- - Checkout [Almond](https://github.com/jrburke/almond) for proposing a built library which does not require RequireJs.
- - Write a How To in the README file
  - Unit tests with Karma
+ - Export the typechecking in a separate file to unit test it later
+ - Write a How To in the README file
+ - Add support for more types: differentiate number(integer and floats), booleans, restricted choices(array)
+ - Add examples for Ajax support
+ - Checkout [Almond](https://github.com/jrburke/almond) for proposing a built library which does not require RequireJs.
