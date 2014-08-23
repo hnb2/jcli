@@ -56,8 +56,12 @@ require(['jcli', 'jquery'], function (JCli, $) {
     //Add it to our command registry
     jcli.add_command(hello);
 
-    //When clicking on 'Submit', interpret the command
-    $('#submit').on('click', function () {
+    //When hitting the 'Enter' key, interpret the command
+    $('#in').keypress(function (e) {
+        if (e.which !== 13) {
+            return;
+        }
+
         jcli.interpret(
             $('#in').val().trim()
         );
