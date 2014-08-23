@@ -56,7 +56,9 @@ define([], function () {
 
     /**
      * Typechecking to verify if the parameter is a string
+     * @method validate_string
      * @param {Any} _parameter, parameter to test
+     * @return {String} returns back the same parameter
      * @private
      */
     var validate_string = function (_parameter) {
@@ -65,19 +67,27 @@ define([], function () {
                 _parameter + ' is not a string'
             );
         }
+
+        return _parameter;
     };
 
     /**
      * Typechecking to verify if the parameter is a number
+     * @method validate_number
      * @param {Any} _parameter, parameter to test
+     * @return {String} returns the parsed parameter
      * @private
      */
     var validate_number = function (_parameter) {
-        if (isNaN(parseInt(_parameter, 10))) {
+        var parsedNumber = parseInt(_parameter, 10);
+
+        if (isNaN(parsedNumber)) {
             throw new Error(
                 _parameter + ' is not a number'
             );
         }
+
+        return parsedNumber;
     };
 
     /**
@@ -100,17 +110,16 @@ define([], function () {
             );
         }
 
-        _args.forEach(function (element, index, array) {
+        _args.forEach(function (element, index) {
             var type = params[index].type;
 
             //TODO: Constants for the types
             switch (type) {
                 case 'string':
-                    validate_string(element);
+                    _args[index] = validate_string(element);
                     break;
                 case 'number':
-                    //TODO: Re-assign a parsed number
-                    validate_number(element);
+                    _args[index] = validate_number(element);
                     break;
                 default:
                     throw new Error(
