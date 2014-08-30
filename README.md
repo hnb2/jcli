@@ -15,6 +15,11 @@ You can build JCli by using Requirejs Node module and the configuration file lik
 
 `grunt build`
 
+### Testing
+You can run unit tests (Karma + PhantomJS) and get code coverage by running:
+
+`grunt test`
+
 ## TODO
  - Unit tests with Karma
  - Export the typechecking in a separate file to unit test it later
