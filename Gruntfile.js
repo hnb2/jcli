@@ -31,12 +31,20 @@ module.exports = function (grunt) {
                 src: 'build/jcli.min.js',
                 dest: 'demo/lib/jcli.min.js'
             }
+        },
+        karma: {
+            continuous: {
+                configFile: 'karma.conf.js',
+                singleRun: true,
+                browsers: ['PhantomJS']
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-yuidoc');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-karma');
 
     /**
      * Generate the documentation using YuiDoc
@@ -48,4 +56,9 @@ module.exports = function (grunt) {
      * and copy it into demo/
      */
     grunt.registerTask('build', ['requirejs', 'copy']);
+
+    /**
+     * Run the unit tests 
+     */
+    grunt.registerTask('test', ['karma']);
 };
