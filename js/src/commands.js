@@ -23,7 +23,7 @@ define(['command'], function (Command) {
          * Getter for commands
          * @method _get_commands
          * @return {Object} commands
-         * @public
+         * @private
          */
         this._get_commands = function () {
             return commands;
