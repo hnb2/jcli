@@ -11,7 +11,8 @@ Object.keys(window.__karma__.files).forEach(function (file) {
         // Normalize paths to RequireJS module names.
         var path = pathToModule(file);
 
-        allTestFiles.push(path);
+        //TODO: we are not normalizing path anymore
+        allTestFiles.push(file);
     }
 });
 

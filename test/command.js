@@ -1,7 +1,7 @@
 /**
- * Test the model BaseAttribute
+ * Test the model Command
  */
-define(['js/src/command'], function (Command) {
+define(['command'], function (Command) {
     "use strict";
 
     var MOCK_NAME = 'hello';
