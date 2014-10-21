@@ -34,7 +34,9 @@ define(['command', 'parser'], function (Command, Parser) {
         describe('parse', function () {
             var parser = new Parser();
 
-            it('Should raise an exception if the the text is undefined', function () {
+            it(
+                'Should raise an exception if the the text' +
+                'is undefined', function () {
                 var parse_empty = function () {
                     parser.parse();
                 };
@@ -42,7 +44,9 @@ define(['command', 'parser'], function (Command, Parser) {
                 expect(parse_empty).toThrow();
             });
 
-            it('Should raise an exception if the the text is empty', function () {
+            it(
+                'Should raise an exception if the the text' +
+                'is empty', function () {
                 var parse_empty = function () {
                     parser.parse('');
                 };
@@ -57,11 +61,15 @@ define(['command', 'parser'], function (Command, Parser) {
                 expect(result.args).toEqual([]);
             });
 
-            it('Should return the command name and parameters', function () {
+            it(
+                'Should return the command name and parameters',
+                function () {
                 var result = parser.parse('cp source destination');
 
                 expect(result.commandName).toEqual('cp');
-                expect(result.args).toEqual(['source', 'destination']);
+                expect(result.args).toEqual(
+                    ['source', 'destination']
+                );
             });
         });
 
@@ -83,7 +91,9 @@ define(['command', 'parser'], function (Command, Parser) {
                 expect(validate_arguments).toThrow();
             });
 
-            it('Should throw if one of the argument is not a string', function () {
+            it(
+                'Should throw if one of the argument is not' +
+                ' a string', function () {
                 var validate_arguments = function () {
                     parser.validate_arguments(
                         get_mock_command(),
@@ -94,7 +104,9 @@ define(['command', 'parser'], function (Command, Parser) {
                 expect(validate_arguments).toThrow();
             });
 
-            it('Should throw if one of the argument is not a number', function () {
+            it(
+                'Should throw if one of the argument is not' +
+                'a number', function () {
                 var params = [
                     {
                         'name' : 'random number',
