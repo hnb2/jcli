@@ -1,5 +1,5 @@
 /**
- *
+ * Test the class Parser
  */
 define(['command', 'parser'], function (Command, Parser) {
     "use strict";
