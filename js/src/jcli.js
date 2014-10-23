@@ -16,6 +16,10 @@ define(
      * @public
      */
     var JCli = function (_options) {
+        if (_options === undefined) {
+            _options = {};
+        }
+
         /**
          * Dictionnary provided by the user to store custom objects
          * @property context
