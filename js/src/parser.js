@@ -40,12 +40,9 @@ define([], function () {
 
         var args = [];
         if (splittedText.length > 1) {
-            splittedText.forEach(function (element, index, array) {
-                //TODO: Find another way to start the loop from 1
-                if (index > 0) {
-                    args.push(element);
-                }
-            });
+            for (var i = 1; i < splittedText.length; i++) {
+                args.push(splittedText[i]);
+            }
         }
 
         return {
