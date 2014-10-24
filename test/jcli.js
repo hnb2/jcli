@@ -10,9 +10,8 @@ define(['jcli'], function (Jcli) {
 
             it(
                 'Should initialize a jcli object with' +
-                'default callbacks',
+                'default callbacks and an empty context',
                 function () {
-
                 var jcli = new Jcli();
 
                 expect(jcli.context).toEqual({});
@@ -25,10 +24,34 @@ define(['jcli'], function (Jcli) {
 
             it(
                 'Should initialize a jcli object with' +
-                'a context, and 2 callbacks.',
+                'a context and 2 callbacks.',
                 function () {
+                var context = {
+                    currentUsername: 'John Doe'
+                };
 
-                //TODO
+                var on_success = function (_result) {
+                    return 'SUCCESS : ' + _result;
+                };
+
+                var on_failure = function (_result) {
+                    return 'FAILURE : ' + _result;
+                };
+
+                var jcli = new Jcli(
+                    {
+                        context: context,
+                        on_success: on_success,
+                        on_failure: on_failure
+                    }
+                );
+
+                expect(jcli.context).toEqual(context);
+                expect(jcli.on_success).toEqual(on_success);
+                expect(jcli.on_failure).toEqual(on_failure);
+                expect(jcli.commands).toBeDefined();
+                expect(jcli.parser).toBeDefined();
+                expect(jcli.history).toEqual([]);
             });
 
         });
