@@ -38,12 +38,7 @@ define([], function () {
 
         var commandName = splittedText[0];
 
-        var args = [];
-        if (splittedText.length > 1) {
-            for (var i = 1; i < splittedText.length; i++) {
-                args.push(splittedText[i]);
-            }
-        }
+        var args = splittedText.slice(1);
 
         return {
             commandName: commandName,
