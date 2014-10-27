@@ -67,19 +67,15 @@ define(
 
     /**
      * Add a command to JCli so that it can be interpreted.
+     * Throw an error if the command is invalid or was already added
      * @method add_command
      * @param {Object} _command, a custom object which contains the
                             data of your command.
      * @public
      */
     JCli.prototype.add_command = function (_command) {
-        try {
-            var command = this.commands.make_command(_command);
-            this.commands.register(command);
-        }
-        catch (e) {
-            console.error(e.message);
-        }
+        var command = this.commands.make_command(_command);
+        this.commands.register(command);
     };
 
     /**

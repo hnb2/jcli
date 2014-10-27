@@ -4,6 +4,23 @@
 define(['jcli'], function (Jcli) {
     "use strict";
 
+    var MOCK_CMD_NAME = 'hello';
+    var MOCK_CMD_DESC = 'Says hello.';
+    var MOCK_CMD_PARAMS = [
+        {
+            'name': 'name',
+            'type': 'string'
+        }
+    ];
+
+    var get_mock_command = function () {
+        return {
+            'name': MOCK_CMD_NAME,
+            'description' : MOCK_CMD_DESC,
+            'params' : MOCK_CMD_PARAMS
+        };
+    };
+
     describe('Jcli', function () {
 
         describe('Constructor', function () {
@@ -54,6 +71,48 @@ define(['jcli'], function (Jcli) {
                 expect(jcli.history).toEqual([]);
             });
 
+        });
+
+        describe('add_command', function () {
+            it(
+                'Throw an error if the command is undefined',
+                function () {
+                var jcli = new Jcli();
+
+                var add_command = function () {
+                    jcli.add_command();
+                };
+
+                expect(add_command).toThrow();
+            });
+
+            it(
+                'Adds a command in the registry', function () {
+                var jcli = new Jcli();
+                expect(
+                    jcli.commands.get_command(MOCK_CMD_NAME)
+                ).not.toBeDefined();
+
+                jcli.add_command(get_mock_command());
+
+                expect(
+                    jcli.commands.get_command(MOCK_CMD_NAME)
+                ).toBeDefined();
+            });
+
+            it(
+                'Throw an error if the command has already' +
+                'been added in the register.',
+                function () {
+                var jcli = new Jcli();
+
+                var add_command = function () {
+                    jcli.add_command(get_mock_command());
+                };
+
+                add_command();
+                expect(add_command).toThrow();
+            });
         });
 
     });
