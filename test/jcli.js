@@ -56,6 +56,20 @@ define(['jcli'], function (Jcli) {
 
         });
 
+        describe('add_command', function () {
+            it(
+                'Throw an error if the command is undefined',
+                function () {
+                var jcli = new Jcli();
+
+                var add_command = function () {
+                    jcli.add_command();
+                };
+
+                expect(add_command).toThrow();
+            });
+        });
+
     });
 
 });
