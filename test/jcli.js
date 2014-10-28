@@ -12,12 +12,16 @@ define(['jcli'], function (Jcli) {
             'type': 'string'
         }
     ];
+    var MOCK_CMD_EXEC = function (name, context) {
+        return 'Get out of my garden ' + name;
+    };
 
     var get_mock_command = function () {
         return {
             'name': MOCK_CMD_NAME,
             'description' : MOCK_CMD_DESC,
-            'params' : MOCK_CMD_PARAMS
+            'params' : MOCK_CMD_PARAMS,
+            'exec': MOCK_CMD_EXEC
         };
     };
 
@@ -112,6 +116,70 @@ define(['jcli'], function (Jcli) {
 
                 add_command();
                 expect(add_command).toThrow();
+            });
+        });
+
+        describe('interpret', function () {
+            it('calls on_failure the input is undefined', function () {
+                var jcli = new Jcli();
+
+                var interpret = function () {
+                    jcli.interpret();
+                };
+
+                spyOn(jcli, 'on_failure');
+
+                interpret();
+
+                expect(jcli.on_failure).toHaveBeenCalled();
+            });
+
+            it('calls on_failure the input is empty', function () {
+                var jcli = new Jcli();
+
+                var interpret = function () {
+                    jcli.interpret('');
+                };
+
+                spyOn(jcli, 'on_failure');
+
+                interpret();
+
+                expect(jcli.on_failure).toHaveBeenCalled();
+            });
+
+            it(
+                'calls on_failure if the command cannot be found',
+                function () {
+                var jcli = new Jcli();
+
+                var interpret = function () {
+                    jcli.interpret('hi');
+                };
+
+                spyOn(jcli, 'on_failure');
+
+                interpret();
+
+                expect(jcli.on_failure).toHaveBeenCalled();
+            });
+
+            it(
+                'calls on_failure if the command parameters are' +
+                'used incorrectly: different amount of parameters',
+                function () {
+                var jcli = new Jcli();
+                jcli.add_command(get_mock_command());
+
+                var interpret = function () {
+                    jcli.interpret('hello Boule et Bill');
+                };
+
+                spyOn(jcli, 'on_failure');
+
+                interpret();
+
+                expect(jcli.on_failure).toHaveBeenCalled();
             });
         });
 
