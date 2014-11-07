@@ -1,6 +1,6 @@
 {
   "name": "JCli",
-  "description": "This is only necessary to generate documentation and run unit tests.",
+  "description": "Lightweight command line interpreter focused on offering the user a simple API on which to plug in.",
   "author": "Pierre Guillemot <pierreguillemot@yahoo.fr>",
   "devDependencies": {
     "requirejs": "2.1.x",

@@ -5,7 +5,7 @@
  * @author Pierre Guillemot
  */
 define(
-    ['commands', 'parser', 'lib/q'],
+    ['commands', 'parser', 'lib/q/q'],
     function (Commands, Parser, Q) {
     "use strict";
 

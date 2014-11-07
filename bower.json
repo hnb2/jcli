@@ -1,0 +1,9 @@
+{
+  "name": "JCli",
+  "description": "Lightweight command line interpreter focused on offering the user a simple API on which to plug in.",
+  "version": "0.1",
+  "dependencies": {
+    "requirejs": "~2.1.15",
+    "q": "#1.0.1"
+  }
+}
