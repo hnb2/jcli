@@ -21,7 +21,7 @@ module.exports = function (config) {
         files: [
             'karma-require.js',
             {pattern: 'js/src/*.js', included: false},
-            {pattern: 'js/lib/*.js', included: false},
+            {pattern: 'js/lib/**/*.js', included: false},
             {pattern: 'test/*.js', included: false}
         ],
 
