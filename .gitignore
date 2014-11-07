@@ -5,3 +5,6 @@ build/coverage
 
 #Ignore the downloaded node modules
 node_modules
+
+#Ignore the downloaded bower libraries
+js/lib
